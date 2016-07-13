@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hugnew.sps.dao.PayMapMapper">
+    <resultMap id="BaseResultMap" type="com.hugnew.sps.dao.domain.PayMap">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="orderId" property="orderId" jdbcType="BIGINT"/>
+        <result column="orderCode" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="tempPayCode" property="tempPayCode" jdbcType="VARCHAR"/>
+        <result column="platform" property="platform" jdbcType="VARCHAR"/>
+        <result column="payParams" property="payParams" jdbcType="VARCHAR"/>
+        <result column="retMsg" property="retMsg" jdbcType="VARCHAR"/>
+        <result column="retMsg2" property="retMsg2" jdbcType="VARCHAR"/>
+        <result column="isPaid" property="isPaid" jdbcType="CHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="remark2" property="remark2" jdbcType="VARCHAR"/>
+        <result column="swiftNumber" property="swiftNumber" jdbcType="VARCHAR"/>
+        <result column="payPurpose" property="payPurpose" jdbcType="VARCHAR"/>
+        <result column="idBelongsTo" property="idBelongsTo" jdbcType="VARCHAR"/>
+        <result column="cashAmt" property="cashAmt" jdbcType="DECIMAL"/>
+        <result column="notify_time" property="notifyTime" jdbcType="BIGINT"/>
+    </resultMap>
+</mapper>

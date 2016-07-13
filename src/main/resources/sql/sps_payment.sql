@@ -1,0 +1,18 @@
+CREATE TABLE sps_payment(
+  id BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  payName VARCHAR(100) DEFAULT NULL COMMENT '支付名称',
+  payKey VARCHAR(100) DEFAULT NULL COMMENT '支付关键字',
+  payData VARCHAR(500) DEFAULT NULL COMMENT '支付加密数据',
+  payURI VARCHAR(500) DEFAULT NULL COMMENT '回调URI',
+  payLogoPath VARCHAR(500) DEFAULT NULL COMMENT '支付对应logo地址',
+  pcPayLogoPath VARCHAR(500) DEFAULT NULL COMMENT '支付对应logo地址',
+  shiftPayLogoPath VARCHAR(500) DEFAULT NULL COMMENT '支付对应logo地址',
+  isPlat INT(3) DEFAULT NULL COMMENT '是否支付平台1：支付平台；0：银行',
+  isWebOn INT(3) DEFAULT NULL COMMENT '是否web可用 ： 0：否；1是',
+  isAppOn INT(3) DEFAULT NULL COMMENT '是否app可用',
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+CHARACTER SET utf8
+COLLATE utf8_general_ci
+COMMENT = '支付表';

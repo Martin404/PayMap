@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <package name="com.hugnew.sps.dao.domain"/>
+    </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+            <!-- 和startPage中的pageNum效果一样-->
+            <property name="offsetAsPageNum" value="true"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+            <property name="rowBoundsWithCount" value="true"/>
+            <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+            <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+            <property name="pageSizeZero" value="true"/>
+            <!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 -->
+            <!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+            <!-- 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 -->
+            <property name="reasonable" value="false"/>
+            <!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 -->
+            <!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 -->
+            <!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,不配置映射的用默认值 -->
+            <property name="params"
+                      value="pageNum=start;pageSize=limit;pageSizeZero=zero;reasonable=heli;count=contsql"/>
+        </plugin>
+        <plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
+            <!--================================================-->
+            <!--可配置参数说明(一般无需修改)-->
+            <!--================================================-->
+            <!--UUID生成策略-->
+            <!--配置UUID生成策略需要使用OGNL表达式-->
+            <!--默认值32位长度:@java.util.UUID@randomUUID().toString().replace("-", "")-->
+            <!--<property name="UUID" value="@java.util.UUID@randomUUID().toString()"/>-->
+            <!--主键自增回写方法,默认值MYSQL,详细说明请看文档-->
+            <property name="IDENTITY" value="MYSQL"/>
+            <!--序列的获取规则,使用{num}格式化参数，默认值为{0}.nextval，针对Oracle-->
+            <!--可选参数一共3个，对应0,1,2,分别为SequenceName，ColumnName,PropertyName-->
+            <property name="seqFormat" value="{0}.nextval"/>
+            <!--主键自增回写方法执行顺序,默认AFTER,可选值为(BEFORE|AFTER)-->
+            <!--<property name="ORDER" value="AFTER"/>-->
+            <!--通用Mapper接口，多个通用接口用逗号隔开-->
+            <!-- <property name="mappers" value="com.github.abel533.mapper.Mapper"/>-->
+            <property name="mappers" value="com.hugnew.core.dao.IBaseMapper"/>
+            <!--<property name="enableUnderline" value="false"/>-->
+        </plugin>
+    </plugins>
+
+</configuration>

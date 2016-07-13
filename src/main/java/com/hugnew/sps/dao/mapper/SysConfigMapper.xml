@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hugnew.sps.dao.SysConfigMapper">
+    <resultMap id="BaseResultMap" type="com.hugnew.sps.dao.domain.SysConfig">
+        <id column="sysKey" property="sysKey" jdbcType="VARCHAR"/>
+        <result column="modifyTime" property="modifyTime" jdbcType="BIGINT"/>
+        <result column="accountId" property="accountId" jdbcType="BIGINT"/>
+        <result column="sysValue" property="sysValue" jdbcType="LONGVARCHAR"/>
+        <result column="description" property="description" jdbcType="LONGVARCHAR"/>
+        <result column="operator" property="operator" jdbcType="VARCHAR"/>
+        <result column="isCache" property="isCache" jdbcType="BOOLEAN"/>
+    </resultMap>
+
+    <update id="updateSysConfig">
+        UPDATE sps_sys_config SET sysValue=#{sysValue},modifyTime=unix_timestamp(now()) where sysKey=#{key}
+    </update>
+
+    <select id="getAll" resultType="com.hugnew.sps.dao.domain.SysConfig">
+        SELECT * FROM  sps_sys_config WHERE  isCache=1
+    </select>
+
+</mapper>

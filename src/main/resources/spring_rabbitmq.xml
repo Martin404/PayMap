@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/mvc
+	  http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <mvc:annotation-driven/>
+
+    <rabbit:connection-factory id="connectionFactory" host="${rabbitmq.master.ip}" port="${rabbitmq.master.port}"
+                               username="${rabbitmq.master.username}" password="${rabbitmq.master.password}"/>
+
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"
+                     exchange="order_topic_exchange" message-converter="gsonConverter"/>
+
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <rabbit:queue name="payRequestQueue" durable="true"/>
+    <rabbit:queue name="payRequestCallbackQueue" durable="true"/>
+    <rabbit:queue name="payNotifyQueue" durable="true"/>
+
+    <rabbit:topic-exchange name="pay_topic_exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="payRequestQueue" pattern="payRequest.#"/>
+            <rabbit:binding queue="payRequestCallbackQueue" pattern="payRequestCallback.#"/>
+            <rabbit:binding queue="payNotifyQueue" pattern="payNotify.#"/>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="manual" concurrency="10">
+        <rabbit:listener queues="payRequestQueue" ref="payRequestQueueListener"/>
+    </rabbit:listener-container>
+
+    <bean id="payRequestQueueListener" class="com.hugnew.sps.mq.PayRequestQueueListener"/>
+
+    <bean id="gsonConverter" class="com.hugnew.core.mq.Gson2JsonMessageConverter"/>
+
+</beans>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       ">
+
+    <!--配置securityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="statelessRealm"/>
+    </bean>
+    <!--statelessReealm-->
+    <bean id="statelessRealm" class="com.hugnew.sps.realm.StatelessAuthRealm">
+        <property name="cachingEnabled" value="false"/>
+    </bean>
+    <!--statelessFilter-->
+    <bean id="statelessFilter" class="com.hugnew.sps.realm.filter.StatelessAuthcFilter"></bean>
+    <!-- 基于Form表单的身份验证过滤器 -->
+    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+        <property name="usernameParam" value="username"/>
+        <property name="passwordParam" value="password"/>
+        <property name="rememberMeParam" value="rememberMe"/>
+        <property name="loginUrl" value="/jsp/login"/>
+    </bean>
+
+    <!--配置shiroFilter-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="filters">
+            <util:map>
+                <entry key="stateless" value-ref="statelessFilter"/>
+            </util:map>
+        </property>
+        <!--过滤链定义-->
+        <property name="filterChainDefinitions">
+            <value>
+                /=anon
+                /index.jsp=anon
+                /app/**=stateless
+            </value>
+        </property>
+    </bean>
+    <!-- Shiro生命周期处理器-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+</beans>

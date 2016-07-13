@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hugnew.sps.dao.PaymentMapper">
+    <resultMap id="BaseResultMap" type="com.hugnew.sps.dao.domain.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="payName" property="payName" jdbcType="VARCHAR"/>
+        <result column="payKey" property="payKey" jdbcType="VARCHAR"/>
+        <result column="payData" property="payData" jdbcType="VARCHAR"/>
+        <result column="payURI" property="payURI" jdbcType="VARCHAR"/>
+        <result column="payLogoPath" property="payLogoPath" jdbcType="VARCHAR"/>
+        <result column="payLogoPath" property="pcPayLogoPath" jdbcType="VARCHAR"/>
+        <result column="payLogoPath" property="shiftPayLogoPath" jdbcType="VARCHAR"/>
+        <result column="isPlat" property="isPlat" jdbcType="INTEGER"/>
+        <result column="isWebOn" property="isWebOn" jdbcType="INTEGER"/>
+        <result column="isAppOn" property="isAppOn" jdbcType="INTEGER"/>
+    </resultMap>
+</mapper>

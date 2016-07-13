@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %X{req.remoteHost} %X{req.requestURI} %logger{36} - %msg %n
+            </Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+    </appender>
+
+    <appender name="hourlyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- hourly rollover -->
+            <FileNamePattern>/var/log/sps/core/sps-core.%d{yyyy-MM-dd_HH}.log</FileNamePattern>
+
+            <!-- keep 48 hours' worth of history -->
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %X{req.remoteHost} %X{req.requestURI} %logger{36} - %msg %n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="hourlyRollingFileErrorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- hourly rollover -->
+            <FileNamePattern>/var/log/sps/error/sps-error.%d{yyyy-MM-dd_HH}.log</FileNamePattern>
+
+            <!-- keep 48 hours' worth of history -->
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %X{req.remoteHost} %X{req.requestURI} %logger{36} - %msg %n
+            </Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <target>System.err</target>
+    </appender>
+
+    <appender name="rootHourlyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- hourly rollover -->
+            <FileNamePattern>/var/log/sps/run/sps-run.%d{yyyy-MM-dd_HH}.log</FileNamePattern>
+
+            <!-- keep 48 hours' worth of history -->
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %X{req.remoteHost} %X{req.requestURI} %logger{36} - %msg %n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.hugnew" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="hourlyRollingFileAppender"/>
+        <appender-ref ref="hourlyRollingFileErrorAppender"/>
+    </logger>
+
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="consoleAppender"/>
+
+    </root>
+</configuration>

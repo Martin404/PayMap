@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hugnew.sps.dao.MemberMapper">
+    <resultMap id="BaseResultMap" type="com.hugnew.sps.dao.domain.Member">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="userCode" jdbcType="VARCHAR" property="userCode"/>
+        <result column="userLabel" jdbcType="INTEGER" property="userLabel"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="grade" jdbcType="INTEGER" property="grade"/>
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="showImage" jdbcType="VARCHAR" property="showImage"/>
+        <result column="birthday" jdbcType="BIGINT" property="birthday"/>
+        <result column="birthdayStr" jdbcType="VARCHAR" property="birthdayStr"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="emailStatus" jdbcType="INTEGER" property="emailStatus"/>
+        <result column="cellphone" jdbcType="VARCHAR" property="cellphone"/>
+        <result column="phoneStatus" jdbcType="INTEGER" property="phoneStatus"/>
+        <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="createTime" jdbcType="BIGINT" property="createTime"/>
+        <result column="modifyTime" jdbcType="BIGINT" property="modifyTime"/>
+        <result column="otherInfo" jdbcType="LONGVARCHAR" property="otherInfo"/>
+        <result column="IdCardNo" jdbcType="VARCHAR" property="IdCardNo"/>
+        <result column="referee" jdbcType="BIGINT" property="referee"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="points" jdbcType="INTEGER" property="points"/>
+        <result column="orderCount" jdbcType="INTEGER" property="orderCount"/>
+        <result column="odooId" jdbcType="INTEGER" property="odooId"/>
+        <result column="orderAmount" jdbcType="DECIMAL" property="orderAmount"/>
+        <result column="memberMark" jdbcType="INTEGER" property="memberMark"/>
+        <result column="memberLabel" jdbcType="VARCHAR" property="memberLabel"/>
+        <result column="labelReason" jdbcType="VARCHAR" property="labelReason"/>
+        <result column="del" jdbcType="BIT" property="del"/>
+        <result column="gradeAmount" jdbcType="DECIMAL" property="gradeAmount"/>
+        <result column="gradeChangeTime" jdbcType="BIGINT" property="gradeChangeTime"/>
+        <result column="phoneUpdateTime" jdbcType="BIGINT" property="phoneUpdateTime"/>
+        <result column="emailUpdateTime" jdbcType="BIGINT" property="emailUpdateTime"/>
+    </resultMap>
+
+    <select id="findByUsername" parameterType="String" resultType="com.hugnew.sps.dao.domain.Member">
+        SELECT * FROM sps_member where username=#{username} and del=0 GROUP BY createTime ASC limit 0,1
+    </select>
+
+</mapper>

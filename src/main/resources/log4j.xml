@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+    <!--==================================================================================  -->
+    <!--=========================DO NOT MODIFY FOLLOWING BLOCK============================  -->
+    <!--==================================================================================  -->
+    <appender name="stdout-appender" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="[%d{MMdd HH:mm:ss SSS\} %-5p] [%t] %c{1}.%M(%L) | %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="rolling-file-appender" class="org.apache.log4j.DailyRollingFileAppender">
+        <!-- 如果是win系统，则在eclipse所在盘符下的以下路径中 -->
+        <param name="File" value="/home/bealog/systemlinker/emall.log"/>
+        <param name="DatePattern" value="'.'yyyyMMdd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="[%d{MMdd HH:mm:ss SSS\} %-5p] [%t] %c{1}.%M(%L) | %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="com.icbc">
+        <level value="DEBUG"/>
+    </logger>
+
+    <root>
+        <level value="DEBUG"/>
+        <!--         <appender-ref ref="stdout-appender"/> -->
+        <appender-ref ref="rolling-file-appender"/>
+    </root>
+
+</log4j:configuration>
