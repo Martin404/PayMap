@@ -15,6 +15,7 @@ CREATE TABLE sps_pay_map(
   cashAmt DECIMAL(18, 2) DEFAULT NULL COMMENT '本次支付所使用的现金账户金额，sps_order表中有该字段，所以普通订单支付时此字段为空',
   remark2 VARCHAR(200) DEFAULT NULL,
   notify_time BIGINT(20) DEFAULT NULL COMMENT '通知回调时间',
+  requestBiz VARCHAR(200) DEFAULT NULL COMMENT '支付请求业务来源',
   PRIMARY KEY (id),
   INDEX orderCode (orderCode),
   INDEX orderId (orderId)
