@@ -1,5 +1,4 @@
-
-package com.alipay.util;
+package com.hugnew.sps.services.pay.util.web.ali.global.util;
 
 import java.util.Date;
 import java.util.Random;
